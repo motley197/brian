@@ -1,0 +1,2 @@
+https://thepihut.com/products/sx1262-868mhz-lora-node-module-for-raspberry-pi-pico
+https://www.waveshare.com/wiki/Pico-LoRa-SX1262-868M
