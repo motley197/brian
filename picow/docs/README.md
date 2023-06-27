@@ -8,7 +8,7 @@ The following packages need to be installed:
 
 ```
 sudo apt update
-sudo apt install build-essential git micro pkg-config
+sudo apt install build-essential git micro pkg-config git-lfs
 sudo apt install cmake gcc-arm-none-eabi 
 sudo apt install libnewlib-arm-none-eabi 
 sudo apt install libstdc++-arm-none-eabi-newlib
@@ -46,6 +46,10 @@ git clone https://github.com/raspberrypi/pico-examples.git --branch master
 git clone https://github.com/raspberrypi/pico-project-generator
 git clone https://github.com/raspberrypi/picotool.git --branch master
 git clone https://github.com/raspberrypi/openocd.git --branch rp2040 --recursive --depth=1
+git clone https://github.com/raspberrypi/picoprobe.git
+cd picoprobe
+git submodule update --init
+cd ..
 ```
 
 To build the forked version of `openocd` (supports Pico dual-core), do the following:
@@ -70,6 +74,17 @@ cd build
 cmake ..
 make -j4
 sudo make install
+cd ..
+```
+
+To build `picoprobe`, do the following:
+
+```
+cd ~/pico
+cd picoprobe
+mkdir build && cd build
+cmake ..
+make -j4
 cd ..
 ```
 
