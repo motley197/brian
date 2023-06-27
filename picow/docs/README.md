@@ -8,7 +8,7 @@ The following packages need to be installed:
 
 ```
 sudo apt update
-sudo apt install build-essential git micro
+sudo apt install build-essential git micro pkg-config
 sudo apt install cmake gcc-arm-none-eabi 
 sudo apt install libnewlib-arm-none-eabi 
 sudo apt install libstdc++-arm-none-eabi-newlib
@@ -17,7 +17,6 @@ sudo apt install libusb-1.0-0-dev
 sudo apt install python3-dev python3-pip
 sudo apt install gdb-multiarch
 ```
-
 
 ## Hardware setup:
 
@@ -55,7 +54,7 @@ To build the forked version of `openocd` (supports Pico dual-core), do the follo
 cd ~/pico
 cd openocd
 ./bootstrap
-./configure --enable-ftdi --enable-sysfsgpio --enable-bcm2835gpio
+./configure
 make -j4
 sudo make install
 cd ..
@@ -73,7 +72,6 @@ make -j4
 sudo make install
 cd ..
 ```
-
 
 ## Modifications for Pico W
 
