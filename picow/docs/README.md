@@ -8,7 +8,7 @@ The following packages need to be installed:
 
 ```
 sudo apt update
-sudo apt install build-essential git micro pkg-config git-lfs
+sudo apt install build-essential git micro pkg-config git-lfs minicom
 sudo apt install cmake gcc-arm-none-eabi 
 sudo apt install libnewlib-arm-none-eabi 
 sudo apt install libstdc++-arm-none-eabi-newlib
@@ -63,6 +63,10 @@ make -j4
 sudo make install
 cd ..
 ```
+
+> *NOTE* 
+>
+> I have also seen `./configure --enable-ftdi --enable-sysfsgpio --enable-bcm2835gpio` which I *think* is needed for the Raspberry Pi based SWD.
 
 To build `picotool`, do the following:
 
@@ -245,6 +249,98 @@ Now set a breakpoint in main and start it running
 
 ### Debug the Code in Visual Studio Code
 
+I have not fully solved this one as I cannot find official documentation. What seems to work is to start `openocd` manually (as above) and connect to it as a remote debugger.
+
+So again, start the debug server in a separate terminal:
+
+```
+sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
+```
+
+A pre-build project has been [included in this repository](../blink/). You can [see the project files here](https://github.com/motley197/brian/tree/main/picow/blink)
+
+In a terminal, navigate to the blink folder (part of this repository, /picow/blink) and type the following:
+
+```
+rm -rf build
+code .
+```
+
+At the bottom of the screen, you may need to choose a "kit" (arm-none-eabi) and set the CMake build variant to debug.
+
+Now select the Debug view (ctrl-shift-D). At the top of the screen is a small green arrow. Clicking this should build and debug.
+
+*A little information on how this was set up*
+
+I first used the "Pico Project Generator" to create a basic project:
+
+```
+cd ~/pico/pico-project-generator/
+./pico_project.py --gui
+```
+
+* The files were moved out, and **the build folder was deleted**.
+* The `.vscode` sub-folder contains two files: `launch.json` and `settings.json`. These were derived from the examples in the SDK folder `~/pico/pico-examples/ide/vscode/`
+   * for `launch.json`, I've copied `launch-remote-openocd.json`
+* The `CMakeLists.txt` was modified.
+
+The `CMakeLists.txt` file reads as follows:
+
+```cmake
+cmake_minimum_required(VERSION 3.13)
+
+# Initialise pico_sdk from installed location
+# (note this can come from environment, CMake cache etc)
+set(PICO_SDK_PATH "/home/noutram/git/pico-sdk")
+set(PICO_BOARD pico_w CACHE STRING "Board type")
+set(CMAKE_BUILD_TYPE Debug)
+set(WIFI_SSID "BT-JJAHNM")
+set(WIFI_PASSWORD "<wifi password>")
+
+include(pico_sdk_import.cmake)
+
+if (PICO_SDK_VERSION_STRING VERSION_LESS "1.4.0")
+  message(FATAL_ERROR "Raspberry Pi Pico SDK version 1.4.0 (or later) required. Your version is ${PICO_SDK_VERSION_STRING}")
+endif()
+
+project(picow_blink C CXX ASM)
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+
+pico_sdk_init()
+
+add_executable(picow_blink
+   picow_blink.c
+)
+
+pico_set_program_name(picow_blink "picow_blink")
+pico_set_program_version(picow_blink "0.1")
+
+pico_enable_stdio_usb(picow_blink 0)
+pico_enable_stdio_uart(picow_blink 1)
+
+pico_add_extra_outputs(picow_blink)
+
+target_link_libraries(picow_blink pico_stdlib)
+
+target_link_libraries(picow_blink
+        pico_stdlib              # for core functionality
+        pico_cyw43_arch_none     # we need Wifi to access the GPIO, but we don't need anything else
+)
+
+# Add the standard include files to the build
+target_include_directories(picow_blink PRIVATE
+  ${CMAKE_CURRENT_LIST_DIR}
+  ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
+)
+
+# create map/bin/hex file etc.
+pico_add_extra_outputs(picow_blink)
+
+```
+
+Then leave VS Code to do the rest.
 
 ## Update the SDK
 
