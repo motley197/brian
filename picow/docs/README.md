@@ -154,7 +154,7 @@ ls
 Staying in this `build` folder, we see all the subfolders containing corresponding makefiles for each example. For example, let's build the pico_w version of blinky:
 
 ```
-cd pico_w/wifi/blink
+cd ~/pico/pico-examples/build/pico_w/wifi/blink
 make -j4
 ls
 ```
@@ -186,11 +186,51 @@ The drag-drop method is tedious, and will cause wear on the connectors. Better i
 sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program picow_blink.elf verify reset exit"
 ```
 
-If you changed the [UDEV permissions](#udev-permissions), then you can drop `sudo` :)
+If you changed the [UDEV permissions](#udev-permissions), then you can drop `sudo` (yipee :). It is possible this might help integrating debug into an IDE (to be proven)
 
 
-### Debug the Code
+### Debug the Code in a Terminal (using the pico debugger)
 
+It is useful to be able to single step code, set breakpoints and inspect variables. Of course, an IDE should make this a relatively seamless experience (assuming you can set one up). However, it is useful to see it in action at command line level.
+
+First open **an additional** terminal and run the following command.
+
+```
+cd ~/pico/pico-examples/build/pico_w/wifi/blink
+sudo /usr/local/bin/openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
+```
+
+Again, you might be able to drop the `sudo`. You can leave this running for the duration of your development session.
+
+From a different terminal, you can now run the following:
+
+```
+cd ~/pico/pico-examples/build/pico_w/wifi/blink
+gdb-multiarch picow_blink.elf
+```
+
+Connect to the debugger (listening on port 3333)
+
+```
+(gdb) target remote localhost:3333
+```
+
+Load code into flash
+
+```
+(gdb) load
+```
+
+Now set a breakpoint in main and start it running
+
+```
+(gdb) monitor reset init
+(gdb) b main
+(gdb) continue
+```
+
+
+### Debug the Code in Visual Studio Code
 
 
 ## Update the SDK
