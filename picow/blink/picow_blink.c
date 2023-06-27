@@ -4,6 +4,9 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+// Don't forget to start the debugger first!
+// openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
+
 #include "pico/stdlib.h"
 #include "pico/cyw43_arch.h"
 
