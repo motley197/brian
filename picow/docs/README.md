@@ -296,11 +296,11 @@ cmake_minimum_required(VERSION 3.13)
 
 # Initialise pico_sdk from installed location
 # (note this can come from environment, CMake cache etc)
-set(PICO_SDK_PATH "/home/noutram/git/pico-sdk")
+set(PICO_SDK_PATH "/home/myusername/git/pico-sdk")  # CHANGE THIS!!!
 set(PICO_BOARD pico_w CACHE STRING "Board type")
 set(CMAKE_BUILD_TYPE Debug)
-set(WIFI_SSID "BT-JJAHNM")
-set(WIFI_PASSWORD "<wifi password>")
+set(WIFI_SSID "<wifi SSID>")  # CHANGE THIS!!
+set(WIFI_PASSWORD "<wifi password>") # CHANGE THIS!!
 
 include(pico_sdk_import.cmake)
 
