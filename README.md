@@ -7,3 +7,5 @@ The idea is to connect to sensors and controls in a remote location using Lora a
 First project is to monitor growing conditions for plants and control their environment.
 
 This repo is somewhere to drop all our links, documents and ideas - maybe some code as well!
+
+The repo is named after the "Great Brians of Britain" in no particular order, Brian of Nazareth, Brian Blessed, Brian May and Brian the Snail
