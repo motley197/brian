@@ -245,11 +245,16 @@ Now set a breakpoint in main and start it running
 (gdb) b main
 (gdb) continue
 ```
-
-
-### Debug the Code in Visual Studio Code
+## Create a new project for debugging in Visual Studio Code
 
 I have not fully solved this one as I cannot find official documentation. What seems to work is to start `openocd` manually (as above) and connect to it as a remote debugger.
+
+Given all the above, the steps are probably easier to show than write. The following video hopefully captures it.
+
+https://youtu.be/T09zMnDtpZ4
+
+
+### The written and slightly more verbose version
 
 So again, start the debug server in a separate terminal:
 
@@ -257,7 +262,7 @@ So again, start the debug server in a separate terminal:
 sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
 ```
 
-A pre-build project has been [included in this repository](../blink/). You can [see the project files here](https://github.com/motley197/brian/tree/main/picow/blink)
+A pre-built project has been [included in this repository](../blink/). You can [see the project files here](https://github.com/motley197/brian/tree/main/picow/blink)
 
 In a terminal, navigate to the blink folder (part of this repository, /picow/blink) and type the following:
 
