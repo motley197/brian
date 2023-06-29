@@ -253,6 +253,20 @@ Given all the above, the steps are probably easier to show than write. The follo
 
 https://youtu.be/T09zMnDtpZ4
 
+I've sent some PULL REQUESTS to add support for the debug probe. 
+
+For the pico examples, https://github.com/raspberrypi/pico-examples/pull/401
+For the pico project generator, https://github.com/raspberrypi/pico-project-generator/pull/76
+
+As an interim, you can try using the fork https://github.com/noutram/pico-project-generator to build a project using the gui tool 
+
+```
+cd pico
+mkdir forks
+cd forks
+git clone https://github.com/noutram/pico-project-generator
+./pico_project.py --gui
+```
 
 ### The written and slightly more verbose version
 
