@@ -247,18 +247,27 @@ Now set a breakpoint in main and start it running
 ```
 ## Create a new project for debugging in Visual Studio Code
 
-I have not fully solved this one as I cannot find official documentation. What seems to work is to start `openocd` manually (as above) and connect to it as a remote debugger.
+The official documentation does not say much about the cmsis-dap "Debug Probe". 
+
+There are a couple options however:
+
+### Start the debugger manually
+What seems to work well is to start `openocd` manually (as above) and connect to it as a remote debugger.
 
 Given all the above, the steps are probably easier to show than write. The following video hopefully captures it.
 
 https://youtu.be/T09zMnDtpZ4
 
-I've sent some PULL REQUESTS to add support for the debug probe. 
+### The pico-project-generate tool
+There is a really neat little tool to create projects and starter code for the pico and pico_w. It also includes an option to generate project files for VS Code
 
-For the pico examples, https://github.com/raspberrypi/pico-examples/pull/401
-For the pico project generator, https://github.com/raspberrypi/pico-project-generator/pull/76
+https://github.com/raspberrypi/pico-project-generator
 
-As an interim, you can try using the fork https://github.com/noutram/pico-project-generator to build a project using the gui tool 
+Unfortunately, cmcsis-dap debig probe is not offically supported at the time of writing, so as an interim, you can try using our fork for this project 
+
+https://github.com/noutram/pico-project-generator 
+
+To build a project using the gui tool 
 
 ```
 cd pico
@@ -267,6 +276,11 @@ cd forks
 git clone https://github.com/noutram/pico-project-generator
 ./pico_project.py --gui
 ```
+
+Note this is not yet fuly tested. I've sent some PULL REQUESTS to add support for the debug probe. 
+
+For the pico examples, https://github.com/raspberrypi/pico-examples/pull/401
+For the pico project generator, https://github.com/raspberrypi/pico-project-generator/pull/76
 
 ### The written and slightly more verbose version
 
