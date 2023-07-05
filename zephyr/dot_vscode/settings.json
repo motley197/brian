@@ -1,0 +1,16 @@
+{
+    //Specify where openocd is located (try `which openocd`)
+    "openocdExecutablePath": "/usr/local/bin/openocd",
+
+    //Specify the openocd settings path. This will have a sub-folder interface, within which are all the debugger config files (incl. cmsis-dap.cfg)
+    "openocdDefaultPath": "/usr/local/share/openocd/scripts",
+
+    //Define where the zephyr tree is stored - within which are subfolders modules, tools, bootloader and zephyr
+    "jephyrRoot": "${env:HOME}/zephyrproject",
+
+    //Define where the sdk was unpacked - within which is the subfolder arm-zephyr-eabi 
+    "jephyrSDK": "${env:HOME}/bin/zephyr-sdk-0.16.1",
+
+    //Required (again) for the cortex debug plugin (I assume)
+    "cortex-debug.openocdPath": "/usr/local/bin/openocd"
+}
