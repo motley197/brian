@@ -5,6 +5,12 @@
 .cmake
 build
 
+# venv
+.venv
+
+# pico-w-go settings
+.picowgo
+
 # Compiled Object files
 *.slo
 *.lo
@@ -35,3 +41,4 @@ build
 *.out
 *.app
 
+uPython/.picowgo
