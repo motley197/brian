@@ -1,11 +1,27 @@
+# Pong
 from sx1262 import SX1262
 import time
+from machine import Pin
 
+pin = Pin("LED", Pin.OUT)
+
+def flash_led(N, delay_ms):
+    for n in range (1,N+1):
+        pin.toggle()
+        time.sleep_ms(delay_ms)
+        pin.toggle()
+        time.sleep_ms(delay_ms)
+        
 def cb(events):
     if events & SX1262.RX_DONE:
         msg, err = sx.recv()
-        error = SX1262.STATUS[err]
-        print('Receive: {}, {}'.format(msg, error))
+        if msg == b'Ping':
+            error = SX1262.STATUS[err]
+            print('Receive: {}, {}'.format(msg, error))
+            flash_led(4, 50)
+            sx.send(b'Pong')
+            flash_led(2, 100)
+            
     elif events & SX1262.TX_DONE:
         print('TX done.')
 
@@ -27,8 +43,6 @@ sx.begin(freq=868, bw=500.0, sf=12, cr=8, syncWord=0x12,
 ##            tcxoVoltage=1.6, useRegulatorLDO=False,
 ##            blocking=True)
 
+print("PONG")
+pin.off()
 sx.setBlockingCallback(False, cb)
-
-while True:
-    sx.send(b'Ping')
-    time.sleep(10)
