@@ -19,3 +19,25 @@ Well, consider this is a homage to four Great British Brian's:
 * Brian the Snail (from the legendary, and somewhat surreal children's TV programme, "The Magic Roundabout").
 
 If Douglas Adams had a middle name of Brian, we would include him too, but he doesn't as far as I know. Maybe the next repository will be called Douglas.
+
+# Links
+
+The LoRa board is by wavesahre
+https://thepihut.com/products/sx1262-868mhz-lora-node-module-for-raspberry-pi-pico
+
+Further details are here: https://www.waveshare.com/wiki/Pico-LoRa-SX1262-868M
+
+This one is based on RP2040 boards and Semtech SX1276/1277/1278/1279 Lora boards
+
+## Libraries
+
+For C/C++ this looks promising
+
+https://github.com/akshayabali/pico-lora
+
+Credit to Akshaya Bali who in turn acknowledges Sandeep Mistry
+
+For micropython, we are using this for prototyping:
+
+https://github.com/ehong-tl/micropySX126X/tree/master
+
