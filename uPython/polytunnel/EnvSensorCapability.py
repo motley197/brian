@@ -1,3 +1,16 @@
+####################################################################################################################################
+# This is the parent class for all the environmental sensors.
+# 
+# It plays the following key roles:
+# 1 - Allows the capability of a sensor (subclass) to be declared
+# 2 - Allows the caller to specify which sensor parameters they wish to use. An exception is raised if the sensor cannot do this
+# 
+# Having a list of required capabilities allows a concrete subclass to not waste time measuring parameters that are not needed.
+# Often some sensors have the same capability. For example:
+#     Temperature can often be measured on two different devices.
+#     We can now choose which of the sensors performs the temperature measurement
+#     We can even mix real sensors with mocked, where the mocked can simulate what is missing in hardware
+####################################################################################################################################
 
 class EnvSensorCapability:
      def __init__(self, has_temp:bool=False, has_pressure:bool=False, has_humidity:bool=False, requirements=[]):

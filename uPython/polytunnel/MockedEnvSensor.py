@@ -1,3 +1,35 @@
+####################################################################################################################################
+# Mocked Environmental Sensor
+#
+# Used for testing or when not all devices are available in hardware
+#
+# Create an instance of this class, and specify which of the three parameters you want to simulate
+#
+# Each is simulated as a sinusoid, separated by 20 degrees.
+# The cycle time is specified in seconds
+# 
+# The following two are identical
+#  sensor =  MockedEnvSensor(cycle_time=6, requirements=["temp", "humid", "pres"])
+#  sensor =  MockedEnvSensor(cycle_time=6) 
+#
+# If you only want temperature, with a time period of 60 seconds
+#  sensor =  MockedEnvSensor(cycle_time=60, requirements=["temp"])
+#
+# To read simulated values as a dictionary of key-value pairs, use the read() API
+#  vals = sensor.read()
+# 
+# Example output:
+#   {
+#     'time': datetime.datetime(2023, 7, 12, 22, 8, 45, 499411), 
+#     'temp': 6.433710564175197, 
+#     'pres': 1009.7842888067954, 
+#     'humid': 43.01135322187372
+#   }
+#
+# The date and time are a datetime object.
+#
+####################################################################################################################################
+
 import sys
 import time
 import datetime
