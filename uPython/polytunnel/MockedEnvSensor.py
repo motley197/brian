@@ -107,30 +107,32 @@ def test3():
     
     if (sys.implementation.name == "cpython"):
         import matplotlib.pyplot as plt
+        plt.subplot(3,1,1)
         plt.plot(times,temp)
-        plt.xticks(rotation=30, ha='right')
-        plt.xlabel('Time')
+        plt.xticks(rotation=0, ha='right')
         plt.ylabel('Temperature')
         plt.title('Mocked Temperature Sensor')
         plt.ylim((0,60))
-        plt.show()
+        # plt.show()
 
+        plt.subplot(3,1,2)
         plt.plot(times,pres)
-        plt.xticks(rotation=30, ha='right')
-        plt.xlabel('Time')
+        plt.xticks(rotation=0, ha='right')
         plt.ylabel('Pressure')
         plt.title('Mocked Pressure Sensor')
         # plt.ylim((0,60))
-        plt.show()
+        # plt.show()
 
+        plt.subplot(3,1,3)
         plt.plot(times,humid)
-        plt.xticks(rotation=30, ha='right')
+        plt.xticks(rotation=0, ha='right')
         plt.xlabel('Time')
         plt.ylabel('Humidity')
         plt.title('Mocked Humidity Sensor')
         plt.ylim((0,100))
+        
         plt.show()
-
+        
 
 test1()
 test2()
