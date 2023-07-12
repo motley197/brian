@@ -14,7 +14,7 @@ This repo is somewhere to drop all our links, documents and ideas - maybe some c
 Well, consider this is a homage to four Great British Brian's:
 
 * Brian of Nazareth (Monty Python's Life of Brian)
-* Brian Blessed (for performances in Black Adder and for swearing)
+* Brian Blessed (for performances in Black Adder and for services to swearing)
 * Brian May (guitarist for Queen)
 * Brian the Snail (from the legendary, and somewhat surreal children's TV programme, "The Magic Roundabout").
 
