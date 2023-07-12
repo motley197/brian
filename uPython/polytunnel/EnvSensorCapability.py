@@ -30,6 +30,10 @@ class EnvSensorCapability:
                     self.requirements[key] = True
                     
      
+# ***************************************************************************
+# ********************************** Tests ********************************** 
+# ***************************************************************************
+
 def test():
     sens = EnvSensorCapability(has_temp=True, has_pressure=True)
     print(sens.capability)

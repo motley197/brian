@@ -27,11 +27,13 @@ class DHT22_Env_Sensor(EnvSensorCapability):
 
           return env_params
     
-
+# ***************************************************************************
+# ********************************** Tests ********************************** 
+# ***************************************************************************
 
 import time
 def test1():
-    sen = DHT22_Env_Sensor()
+    sen = DHT22_Env_Sensor() # Test for both measurements
     cap = sen.capability
     print(cap)
     vals = sen.read()
@@ -41,7 +43,7 @@ def test1():
     print(vals)
 
 def test2():
-    sen = DHT22_Env_Sensor(requirements=["temp"])
+    sen = DHT22_Env_Sensor(requirements=["temp"]) # Only require temperature
     cap = sen.capability
     print(cap)
     vals = sen.read()
@@ -51,7 +53,7 @@ def test2():
     print(vals)
 
 def test3():
-    sen = DHT22_Env_Sensor(requirements=["humid"])
+    sen = DHT22_Env_Sensor(requirements=["humid"]) # Only require humidity
     cap = sen.capability
     print(cap)
     vals = sen.read()
@@ -63,7 +65,7 @@ def test3():
 def test4():
     print("Checking exceptions")
     try:     
-          sen = DHT22_Env_Sensor(requirements=["pres"])
+          sen = DHT22_Env_Sensor(requirements=["pres"]) # We require pressure, but it does not support it!
           cap = sen.capability
           print(cap)
           vals = sen.read()
