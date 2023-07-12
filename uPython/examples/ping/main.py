@@ -1,4 +1,3 @@
-# Pong
 from sx1262 import SX1262
 import time
 from machine import Pin
@@ -11,19 +10,20 @@ def flash_led(N, delay_ms):
         time.sleep_ms(delay_ms)
         pin.toggle()
         time.sleep_ms(delay_ms)
-        
+
+
 def cb(events):
     if events & SX1262.RX_DONE:
         msg, err = sx.recv()
-        if msg == b'Ping':
-            error = SX1262.STATUS[err]
-            print('Receive: {}, {}'.format(msg, error))
-            flash_led(4, 50)
-            sx.send(b'Pong')
-            flash_led(2, 100)
-            
+        error = SX1262.STATUS[err]
+        print('Receive: {}, {}'.format(msg, error))
+        flash_led(4, 50)
+        
     elif events & SX1262.TX_DONE:
+        # Send out signal
         print('TX done.')
+        flash_led(2, 100)
+
 
 sx = SX1262(spi_bus=1, clk=10, mosi=11, miso=12, cs=3, irq=20, rst=15, gpio=2)
 
@@ -43,6 +43,20 @@ sx.begin(freq=868, bw=500.0, sf=12, cr=8, syncWord=0x12,
 ##            tcxoVoltage=1.6, useRegulatorLDO=False,
 ##            blocking=True)
 
-print("PONG")
-pin.off()
+# Switch callback
+def sw_cb():
+    print("Pressed!")
+
+# Identify which board this is
+print("PING")
+pin.on()
+
+# Setup callbacks
 sx.setBlockingCallback(False, cb)
+
+#p2.irq(lambda pin: print("IRQ with flags:", pin.irq().flags()), Pin.IRQ_FALLING)
+
+# Main Loop
+while True:
+    sx.send(b'Ping')
+    time.sleep(5)
