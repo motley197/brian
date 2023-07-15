@@ -1,0 +1,61 @@
+Outline ideas for communications protocol
+-----------------------------------------
+
+The nodes fall into three categories:
+	(1) Base
+	(2) Repeater
+	(3) End
+
+Each node has the same hardware:
+	(1) Rpi Pico W
+	(2) SD card slot
+	(3) Grove sockets for attaching sensors and relays
+	(4) LCD screen for monitoring (optional)
+	(5) 4 DIP switches for ID configuration
+
+Base Node
+---------
+The system has only one of these.
+Functions:
+	(1) Maintain data storage
+	(2) Retrieve data readings from the end nodes
+	(3) Send commands to the end nodes
+
+Repeater Node
+-------------
+The system has a variable number of these.
+Functions:
+	(1) Listen to all communications
+	(2) Re-transmit data packets when required
+	(3) Otherwise save energy
+
+End Node
+--------
+The system has a variable nmber of these.
+Functions:
+	(1) Collect sensor data and store locally
+	(2) Transmit sensor data whan requested
+	(3) Respond to action data packets and execute the action
+	(4) Send caution/warning messages unprompted in certain circumstances
+	(5) Otherwise save energy
+
+Data Packets
+------------
+At the core of the system is the sending and receiving of 'packets' of data.
+
+It's probably easier if these packets are of a fixed size with certain positions within the
+packet having a specific meaning.
+
+There is an overhead to establishing a 'session' between nodes so once established this should 
+persist for a pre-set time before being reset.
+
+A simple system of handshaking is needed to establish a session between nodes. The the session is
+awarded a code which both nodes (including repeater when needed) use to confirm receipt of a valid 
+data packet.
+
+Data packets can contain data for the following:
+	(1) Sensor data
+	(2) Commands
+	(3) Watchdog function (healthcheck)
+	(4) Session reset
+
