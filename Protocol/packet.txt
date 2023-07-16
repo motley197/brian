@@ -1,21 +1,21 @@
 byte posn	contents
 ---------	--------
 0			id info (top nibble sender id) (lower nibble target id 00 for all nodes) 
-1			packet type (see below)
-2			data/command 0
-3			data/command 1
-4			...
-5
-6
-7
-8
-9
-A
-B
-C
-D
-E
-F
+1			Random code 1		
+2			Random code 2
+3			Random code 3
+4			Random code 4
+5			Random code checksum
+6			Packet type
+7			Spare
+8			Data 0
+9			Data 1
+A			Data 2
+B			Data 3
+C			Data 4
+D			Data 5
+E			Data 6
+F			Data 7
 
 Packet types (byte 1)
 	00	Handshake stage 0 
@@ -32,3 +32,8 @@ Packet types (byte 1)
 	11	Session reset seed 1 (select row of array )
 	12	Session reset seed 2 (select column within row)
 	13	Session reset seed 3 (spare)
+	
+The Random codes in byte positions 1 to 4 are generated using pseudo random library which generates for integers
+in the range 0 to 15, this is used in a lookup table stored at both ends of the link. This in generates four 
+ascii characters. The checksum is the sum of the decimal values of these characters (from ascii table).
+The receiving end does the same lookup and if the checksum is correct will process the data. 
