@@ -33,7 +33,7 @@ Packet types (byte 1)
 	12	Session reset seed 2 (select column within row)
 	13	Session reset seed 3 (spare)
 	
-The Random codes in byte positions 1 to 4 are generated using pseudo random library which generates for integers
+The Random codes in byte positions 1 to 4 are generated using pseudo random library which generates four integers
 in the range 0 to 15, this is used in a lookup table stored at both ends of the link. This in generates four 
 ascii characters. The checksum is the sum of the decimal values of these characters (from ascii table).
 The receiving end does the same lookup and if the checksum is correct will process the data. 
